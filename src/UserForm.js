@@ -1,10 +1,8 @@
 import React from 'react';
 
-const formStyle = {
+const style = {
   display: 'flex',
   flexDirection: 'column',
-  padding: '18px',
-  border: '1px solid #000000',
 };
 
 const toDomDate = (date) => {
@@ -28,7 +26,7 @@ const UserForm = ({ user }) => {
   };
 
   return (
-    <form style={formStyle}>
+    <form style={style}>
       <label>
         First Name:{' '}
         <input

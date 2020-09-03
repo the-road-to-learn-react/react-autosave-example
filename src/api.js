@@ -17,6 +17,11 @@ let users = {
   },
 };
 
+export const fetchUsers = () =>
+  new Promise((resolve) =>
+    setTimeout(() => resolve(Object.keys(users)), 1000)
+  );
+
 export const fetchUser = (id) =>
   new Promise((resolve) =>
     setTimeout(() => resolve(users[id]), 1000)
