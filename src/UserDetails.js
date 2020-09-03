@@ -6,23 +6,29 @@ import { fetchUser, updateUser } from './api';
 const UserDetails = ({ userId }) => {
   const [user, setUser] = React.useState(null);
 
+  const loadUser = React.useCallback(async (id) => {
+    setUser(await fetchUser(id));
+  }, []);
+
   React.useEffect(() => {
-    if (!userId) return;
+    setUser(null);
 
-    const loadUser = async () => {
-      setUser(null);
-      const result = await fetchUser(userId);
-      setUser(result);
-    };
+    if (userId) {
+      loadUser(userId);
+    }
+  }, [loadUser, userId]);
 
-    loadUser();
-  }, [userId]);
+  const handleUpdateUser = async (changes) => {
+    await updateUser(userId, changes);
+
+    await loadUser(userId);
+  };
 
   if (!user) {
     return <div>Loading selected user ...</div>;
   }
 
-  return <UserForm user={user} />;
+  return <UserForm user={user} onUpdateUser={handleUpdateUser} />;
 };
 
 export default UserDetails;
