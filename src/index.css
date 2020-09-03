@@ -1,0 +1,17 @@
+ul,
+li {
+  margin: 0;
+  padding: 0;
+  text-decoration-style: none;
+  display: flex;
+}
+
+li {
+  margin-left: 8px;
+}
+
+.container {
+  margin: 9px;
+  padding: 16px;
+  border: 1px solid #000000;
+}
