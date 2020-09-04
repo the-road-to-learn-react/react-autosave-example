@@ -1,3 +1,4 @@
+// pseudo database
 let users = {
   1: {
     id: '1',
@@ -17,6 +18,7 @@ let users = {
   },
 };
 
+// pseudo API
 export const fetchUsers = () =>
   new Promise((resolve) =>
     setTimeout(() => resolve(Object.keys(users)), 500)

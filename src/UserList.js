@@ -2,16 +2,19 @@ import React from 'react';
 
 const UserList = ({ users, selectedUserId, onSelectUserId }) => {
   return (
-    <select
-      selected={selectedUserId}
-      onChange={(event) => onSelectUserId(event.target.value)}
-    >
+    <ul>
       {users.map((id) => (
-        <option key={id} value={id}>
+        <li key={id}>
+          <input
+            type="radio"
+            value={id}
+            checked={id === selectedUserId}
+            onChange={() => onSelectUserId(id)}
+          />
           User ID: {id}
-        </option>
+        </li>
       ))}
-    </select>
+    </ul>
   );
 };
 

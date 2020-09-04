@@ -3,15 +3,15 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link,
 } from 'react-router-dom';
 
+import Navigation from './Navigation';
 import Users from './Users';
 import Home from './Home';
 import AutoSaveContext from './AutoSaveContext';
 import AutoSaveIndicator from './AutoSaveIndicator';
 
-const style = {
+const containerStyle = {
   position: 'relative',
 };
 
@@ -23,19 +23,10 @@ const App = () => {
       <AutoSaveContext.Provider
         value={{ isAutoSaving, setIsAutoSaving }}
       >
-        <div style={style}>
+        <div style={containerStyle}>
           <AutoSaveIndicator />
 
-          <nav>
-            <ul>
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-              <li>
-                <Link to="/users">Users</Link>
-              </li>
-            </ul>
-          </nav>
+          <Navigation />
 
           <Switch>
             <Route exact path="/">
