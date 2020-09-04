@@ -19,21 +19,17 @@ const Users = () => {
   }, []);
 
   if (!users) {
-    return <div className="container">Loading users ...</div>;
+    return <div>Loading users ...</div>;
   }
 
   return (
     <>
-      <div className="container">
-        <UserList
-          users={users}
-          selectedUserId={selectedUserId}
-          onSelectUserId={setSelectedUserId}
-        />
-      </div>
-      <div className="container">
-        <UserDetails userId={selectedUserId} />
-      </div>
+      <UserList
+        users={users}
+        selectedUserId={selectedUserId}
+        onSelectUserId={setSelectedUserId}
+      />
+      <UserDetails userId={selectedUserId} />
     </>
   );
 };

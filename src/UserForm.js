@@ -1,5 +1,8 @@
 import React from 'react';
 
+import Dialog from './Dialog';
+import useClickOutside from './useClickOutside';
+
 const style = {
   display: 'flex',
   flexDirection: 'column',
@@ -39,6 +42,8 @@ const REQUIRED_FIELDS = [
 ];
 
 const UserForm = ({ user, onUpdateUser }) => {
+  const [isPrompt, setIsPrompt] = React.useState(false);
+
   const [userModel, setUserModel] = usePropsSyncedState(user);
 
   const handleChanges = (key, value, withCommit) => {
@@ -66,59 +71,116 @@ const UserForm = ({ user, onUpdateUser }) => {
     }
   };
 
+  const boundaryRef = React.useRef();
+  useClickOutside(boundaryRef, () => {
+    const hasAllRequired = REQUIRED_FIELDS.reduce((acc, value) => {
+      if (!userModel[value]) {
+        acc = false;
+      }
+
+      return acc;
+    }, true);
+
+    const hasChanged = user !== userModel;
+
+    if (!hasAllRequired && hasChanged) {
+      setIsPrompt(true);
+    }
+  });
+
+  const handleCancel = () => {
+    setIsPrompt(false);
+  };
+
+  const handleDiscard = () => {
+    setIsPrompt(false);
+    setUserModel(user);
+  };
+
   return (
-    <div style={style}>
-      <label htmlFor="firstName">First Name*</label>
-      <input
-        id="firstName"
-        type="text"
-        value={userModel.firstName}
-        onChange={(e) => {
-          handleChanges('firstName', e.target.value, false);
-        }}
-        onBlur={handleCommit}
-      />
+    <div className="container" ref={boundaryRef}>
+      {isPrompt && (
+        <Dialog>
+          <Dialog.DialogHeader>Unsaved Changes</Dialog.DialogHeader>
 
-      <label htmlFor="middleName">Middle Name</label>
-      <input
-        id="middleName"
-        type="text"
-        value={userModel.middleName}
-        onChange={(e) => handleChanges('middleName', e.target.value)}
-        onBlur={handleCommit}
-      />
+          <Dialog.DialogContent>
+            There are unsaved changes ...
+          </Dialog.DialogContent>
 
-      <label htmlFor="lastName">Last Name*</label>
-      <input
-        id="lastName"
-        type="text"
-        value={userModel.lastName}
-        onChange={(e) => handleChanges('lastName', e.target.value)}
-        onBlur={handleCommit}
-      />
+          <Dialog.DialogFooter
+            left={
+              <button type="button" onClick={handleCancel}>
+                Cancel
+              </button>
+            }
+            right={
+              <button type="button" onClick={handleDiscard}>
+                Discard
+              </button>
+            }
+          />
+        </Dialog>
+      )}
 
-      <label htmlFor="birthday">Birthday*</label>
-      <input
-        id="birthday"
-        type="date"
-        value={toDomDate(userModel.birthday)}
-        onChange={(e) =>
-          handleChanges('birthday', fromDomDate(e.target.value), true)
-        }
-      />
+      <div style={style}>
+        <label htmlFor="firstName">First Name*</label>
+        <input
+          id="firstName"
+          type="text"
+          value={userModel.firstName}
+          onChange={(e) => {
+            handleChanges('firstName', e.target.value, false);
+          }}
+          onBlur={handleCommit}
+        />
 
-      <label htmlFor="gender">Gender*</label>
-      <select
-        id="gender"
-        selected={user.gender}
-        onChange={(e) =>
-          handleChanges('gender', e.target.value, true)
-        }
-      >
-        <option value="FEMALE">Female</option>
-        <option value="MALE">Male</option>
-        <option value="OTHER">Other</option>
-      </select>
+        <label htmlFor="middleName">Middle Name</label>
+        <input
+          id="middleName"
+          type="text"
+          value={userModel.middleName}
+          onChange={(e) =>
+            handleChanges('middleName', e.target.value)
+          }
+          onBlur={handleCommit}
+        />
+
+        <label htmlFor="lastName">Last Name*</label>
+        <input
+          id="lastName"
+          type="text"
+          value={userModel.lastName}
+          onChange={(e) => handleChanges('lastName', e.target.value)}
+          onBlur={handleCommit}
+        />
+
+        <label htmlFor="birthday">Birthday*</label>
+        <input
+          id="birthday"
+          type="date"
+          value={toDomDate(userModel.birthday)}
+          onChange={(e) =>
+            handleChanges(
+              'birthday',
+              fromDomDate(e.target.value),
+              true
+            )
+          }
+        />
+
+        <label htmlFor="gender">Gender*</label>
+        <select
+          id="gender"
+          selected={user.gender}
+          onChange={(e) =>
+            handleChanges('gender', e.target.value, true)
+          }
+        >
+          <option value="FEMALE">Female</option>
+          <option value="MALE">Male</option>
+          <option value="OTHER">Other</option>
+        </select>
+      </div>
     </div>
   );
 };
