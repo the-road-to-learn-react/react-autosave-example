@@ -31,6 +31,13 @@ const usePropsSyncedState = (prop) => {
   return [model, setModel];
 };
 
+const REQUIRED_FIELDS = [
+  'firstName',
+  'lastName',
+  'birthday',
+  'gender',
+];
+
 const UserForm = ({ user, onUpdateUser }) => {
   const [userModel, setUserModel] = usePropsSyncedState(user);
 
@@ -44,23 +51,33 @@ const UserForm = ({ user, onUpdateUser }) => {
   };
 
   const handleCommit = async () => {
-    await onUpdateUser(userModel);
+    const hasAllRequired = REQUIRED_FIELDS.reduce((acc, value) => {
+      if (!userModel[value]) {
+        acc = false;
+      }
+
+      return acc;
+    }, true);
+
+    if (hasAllRequired) {
+      await onUpdateUser(userModel);
+    }
   };
 
   return (
     <div style={style}>
-      <label htmlFor="firstName">First Name:</label>
+      <label htmlFor="firstName">First Name*</label>
       <input
         id="firstName"
         type="text"
         value={userModel.firstName}
-        onChange={(e) =>
-          handleChanges('firstName', e.target.value, false)
-        }
+        onChange={(e) => {
+          handleChanges('firstName', e.target.value, false);
+        }}
         onBlur={handleCommit}
       />
 
-      <label htmlFor="middleName">Middle Name:</label>
+      <label htmlFor="middleName">Middle Name</label>
       <input
         id="middleName"
         type="text"
@@ -69,7 +86,7 @@ const UserForm = ({ user, onUpdateUser }) => {
         onBlur={handleCommit}
       />
 
-      <label htmlFor="lastName">Last Name:</label>
+      <label htmlFor="lastName">Last Name*</label>
       <input
         id="lastName"
         type="text"
@@ -78,7 +95,7 @@ const UserForm = ({ user, onUpdateUser }) => {
         onBlur={handleCommit}
       />
 
-      <label htmlFor="birthday">Birthday:</label>
+      <label htmlFor="birthday">Birthday*</label>
       <input
         id="birthday"
         type="date"
@@ -88,7 +105,7 @@ const UserForm = ({ user, onUpdateUser }) => {
         }
       />
 
-      <label htmlFor="gender">Gender:</label>
+      <label htmlFor="gender">Gender*</label>
       <select
         id="gender"
         selected={user.gender}
