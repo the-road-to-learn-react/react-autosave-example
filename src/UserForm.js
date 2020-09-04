@@ -59,7 +59,9 @@ const UserForm = ({ user, onUpdateUser }) => {
       return acc;
     }, true);
 
-    if (hasAllRequired) {
+    const hasChanged = user !== userModel;
+
+    if (hasAllRequired && hasChanged) {
       await onUpdateUser(userModel);
     }
   };
