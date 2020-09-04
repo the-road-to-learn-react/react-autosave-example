@@ -19,24 +19,22 @@ let users = {
 
 export const fetchUsers = () =>
   new Promise((resolve) =>
-    setTimeout(() => resolve(Object.keys(users)), 1000)
+    setTimeout(() => resolve(Object.keys(users)), 500)
   );
 
 export const fetchUser = (id) =>
-  new Promise((resolve) =>
-    setTimeout(() => resolve(users[id]), 1000)
-  );
+  new Promise((resolve) => setTimeout(() => resolve(users[id]), 500));
 
 export const updateUser = (id, data) =>
   new Promise((resolve) => {
     const { [id]: user, ...rest } = users;
 
     if (!user) {
-      return setTimeout(() => resolve(false), 1000);
+      return setTimeout(() => resolve(false), 50);
     }
 
     const modifiedUser = { ...user, ...data };
     users = { ...rest, [id]: modifiedUser };
 
-    return setTimeout(() => resolve(true), 1000);
+    return setTimeout(() => resolve(true), 500);
   });

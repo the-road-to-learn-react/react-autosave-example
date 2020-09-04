@@ -8,31 +8,45 @@ import {
 
 import Users from './Users';
 import Home from './Home';
+import AutoSaveContext from './AutoSaveContext';
+import AutoSaveIndicator from './AutoSaveIndicator';
+
+const style = {
+  position: 'relative',
+};
 
 const App = () => {
+  const [isAutoSaving, setIsAutoSaving] = React.useState(false);
+
   return (
     <Router>
-      <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/users">Users</Link>
-            </li>
-          </ul>
-        </nav>
+      <AutoSaveContext.Provider
+        value={{ isAutoSaving, setIsAutoSaving }}
+      >
+        <div style={style}>
+          <AutoSaveIndicator />
 
-        <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route path="/users">
-            <Users />
-          </Route>
-        </Switch>
-      </div>
+          <nav>
+            <ul>
+              <li>
+                <Link to="/">Home</Link>
+              </li>
+              <li>
+                <Link to="/users">Users</Link>
+              </li>
+            </ul>
+          </nav>
+
+          <Switch>
+            <Route exact path="/">
+              <Home />
+            </Route>
+            <Route path="/users">
+              <Users />
+            </Route>
+          </Switch>
+        </div>
+      </AutoSaveContext.Provider>
     </Router>
   );
 };
