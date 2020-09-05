@@ -12,7 +12,7 @@ If a required field isn't filled (here "First Name"), there will be an intercept
 
 ![Sep-05-2020 11-10-48](https://user-images.githubusercontent.com/2479967/92301977-824dde80-ef68-11ea-926f-f9af751be778.gif)
 
-Caveat: The intercepting Dialog is triggered whenever a user clicks outside of the form and not all required fields are filled to be saved. An alternative implementation would be to call this dialog only if a user navigates away (e.g. click "Home" link) or removes the component (e.g. click "User ID: 2" option). The former could be easily integrated once in React Router. However, the latter would need to be implemented for every user interaction on this page which would lead to hiding the component (e.g. "User ID: 2").
+Caveat: The intercepting Dialog is triggered whenever a user clicks outside of the form and not all required fields are filled to be saved. An alternative implementation would be to call this dialog only if a user navigates away (e.g. click "Home" link) or removes the component (e.g. click "User ID: 2" option). The former could be easily integrated once in React Router. However, the latter would need to be implemented for every user interaction (e.g. "User ID: 2"), which removes the form, on this page.
 
 ## Installation
 
