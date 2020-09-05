@@ -6,7 +6,7 @@ Auto save runs every time a user clicks something (e.g. button, option, select) 
 
 If a user navigates away or hides the component, the form is autosaved if all required fields are filled.
 
-![Sep-05-2020 11-16-00](https://user-images.githubusercontent.com/2479967/92302056-45361c00-ef69-11ea-84c7-9eac187dfb2c.gif)
+![Sep-05-2020 11-19-44](https://user-images.githubusercontent.com/2479967/92302116-c8577200-ef69-11ea-96a2-3309ccfba63b.gif)
 
 If a required field isn't filled, there will be an intercepting dialog which asks you to discard the changes (Discard) or to continue with the form (Cancel).
 
