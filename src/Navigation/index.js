@@ -1,21 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const listStyle = {
-  display: 'flex',
-};
-
-const listItemStyle = {
-  marginLeft: '8px',
-};
+import styles from './styles.module.css';
 
 const Navigation = () => (
   <nav>
-    <ul style={listStyle}>
-      <li style={listItemStyle}>
+    <ul className={styles.list}>
+      <li className={styles.item}>
         <Link to="/">Home</Link>
       </li>
-      <li style={listItemStyle}>
+      <li className={styles.item}>
         <Link to="/users">Users</Link>
       </li>
     </ul>

@@ -2,13 +2,7 @@ import React from 'react';
 
 import AutoSaveContext from './AutoSaveContext';
 
-const style = {
-  position: 'absolute',
-  top: '-8px',
-  right: '-8px',
-  backgroundColor: '#000000',
-  color: '#ffffff',
-};
+import styles from './styles.module.css';
 
 const AutoSaveIndicator = () => {
   const { isAutoSaving } = React.useContext(AutoSaveContext);
@@ -17,11 +11,7 @@ const AutoSaveIndicator = () => {
     return null;
   }
 
-  return (
-    <div style={style} className="container">
-      Saving ...
-    </div>
-  );
+  return <div className={styles.container}>Saving ...</div>;
 };
 
 export default AutoSaveIndicator;

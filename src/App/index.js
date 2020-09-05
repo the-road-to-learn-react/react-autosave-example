@@ -5,15 +5,12 @@ import {
   Route,
 } from 'react-router-dom';
 
-import Navigation from './Navigation';
-import Users from './Users';
-import Home from './Home';
-import AutoSaveContext from './AutoSaveContext';
-import AutoSaveIndicator from './AutoSaveIndicator';
+import styles from './styles.module.css';
 
-const containerStyle = {
-  position: 'relative',
-};
+import Navigation from '../Navigation';
+import User from '../User';
+import Home from '../Home';
+import { AutoSaveContext, AutoSaveIndicator } from '../AutoSave';
 
 const App = () => {
   const [isAutoSaving, setIsAutoSaving] = React.useState(false);
@@ -23,7 +20,7 @@ const App = () => {
       <AutoSaveContext.Provider
         value={{ isAutoSaving, setIsAutoSaving }}
       >
-        <div style={containerStyle}>
+        <div className={styles.container}>
           <AutoSaveIndicator />
 
           <Navigation />
@@ -33,7 +30,7 @@ const App = () => {
               <Home />
             </Route>
             <Route path="/users">
-              <Users />
+              <User />
             </Route>
           </Switch>
         </div>

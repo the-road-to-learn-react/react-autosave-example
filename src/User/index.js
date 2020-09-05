@@ -1,8 +1,10 @@
 import React from 'react';
 
+import styles from './styles.module.css';
+
 import UserList from './UserList';
 import UserDetails from './UserDetails';
-import { fetchUsers } from './api';
+import { fetchUsers } from '../api';
 
 const Users = () => {
   const [users, setUsers] = React.useState(null);
@@ -19,7 +21,7 @@ const Users = () => {
   }, []);
 
   if (!users) {
-    return <div>Loading users ...</div>;
+    return <div className={styles.container}>Loading users ...</div>;
   }
 
   return (

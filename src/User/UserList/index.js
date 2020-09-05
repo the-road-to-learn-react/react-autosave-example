@@ -1,8 +1,10 @@
 import React from 'react';
 
+import styles from './styles.module.css';
+
 const UserList = ({ users, selectedUserId, onSelectUserId }) => {
   return (
-    <div className="container">
+    <div className={styles.container}>
       <ul>
         {users.map((id) => (
           <li key={id}>

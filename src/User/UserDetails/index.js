@@ -1,8 +1,10 @@
 import React from 'react';
 
-import UserForm from './UserForm';
-import AutoSaveContext from './AutoSaveContext';
-import { fetchUser, updateUser } from './api';
+import styles from './styles.module.css';
+
+import UserForm from '../UserForm';
+import { AutoSaveContext } from '../../AutoSave';
+import { fetchUser, updateUser } from '../../api';
 
 const UserDetails = ({ userId }) => {
   const { setIsAutoSaving } = React.useContext(AutoSaveContext);
@@ -30,7 +32,11 @@ const UserDetails = ({ userId }) => {
   };
 
   if (!user) {
-    return <div>Loading selected user ...</div>;
+    return (
+      <div className={styles.container}>
+        Loading selected user ...
+      </div>
+    );
   }
 
   return <UserForm user={user} onUpdateUser={handleUpdateUser} />;

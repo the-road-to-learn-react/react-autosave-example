@@ -1,12 +1,9 @@
 import React from 'react';
 
-import Dialog from './Dialog';
-import useClickOutside from './useClickOutside';
+import styles from './styles.module.css';
 
-const style = {
-  display: 'flex',
-  flexDirection: 'column',
-};
+import Dialog from '../../Dialog';
+import useClickOutside from '../../hooks/useClickOutside';
 
 const toDomDate = (date) => {
   if (!date) {
@@ -98,7 +95,7 @@ const UserForm = ({ user, onUpdateUser }) => {
   };
 
   return (
-    <div className="container" ref={boundaryRef}>
+    <div className={styles.container} ref={boundaryRef}>
       {isPrompt && (
         <Dialog>
           <Dialog.DialogHeader>Unsaved Changes</Dialog.DialogHeader>
@@ -122,7 +119,7 @@ const UserForm = ({ user, onUpdateUser }) => {
         </Dialog>
       )}
 
-      <div style={style}>
+      <div className={styles.form}>
         <label htmlFor="firstName">First Name*</label>
         <input
           id="firstName"
