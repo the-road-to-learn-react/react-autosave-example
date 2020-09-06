@@ -16,7 +16,7 @@ Caveat: The intercepting Dialog is triggered whenever a user clicks outside of t
 
 ## Installation
 
-- `git clone git@github.com:rwieruch/react-autosave-example.git`
+- `git clone git@github.com:the-road-to-learn-react/react-autosave-example.git`
 - cd react-autosave-example
 - npm install
 - npm start
